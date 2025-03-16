@@ -20,11 +20,11 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Productos
+                Facturacion
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="lista_productos.html">Listar Productos</a>
-                <a class="dropdown-item" href="formulario_producto.html">Crear Producto</a>
+                <a class="dropdown-item" href="lista_facturacion.html">Listar Facturacion</a>
+                <a class="dropdown-item" href="formulario_facturacion.html">Crear Facturacion</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
               </div>
@@ -37,58 +37,79 @@
           </form>
         </div>
     </nav>
-    <h2>Listado de Productos</h2>   
+    <h2>Listado de Facturas</h2>   
     <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Cantidad Inventario</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Unidad de Medida</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">ID Factura</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Administrador</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">1</th>
-            <td>Pan tajado bolsa 200 grs</td>
-            <td>100</td>
-            <td>5000</td>
-            <td>Unidad</td>
-            <td>Alimentos</td>
-            <td>
-              <button type="button" class="btn btn-success">Editar</button>
-              <button type="button" class="btn btn-danger">Borrar</button>
-            </td>
+            <td>invoice 001</td>
+            <td>15/03/2025</td>
+            <td>Marly Alejandra Gutierrez</td>
+            <td>Jorge Ballesteros</td>
           </tr>
+        </tbody>
           <tr>
-            <th scope="row">2</th>
-            <td>Carne cerdo costilla</td>
-            <td>10000</td>
-            <td>32</td>
-            <td>GRS</td>
-            <td>Alimentos</td>                     
-            <td>
-              <button type="button" class="btn btn-success">Editar</button>
-              <button type="button" class="btn btn-danger">Borrar</button>
-            </td>
-          </tr> 
-          <tr>
-            <th scope="row">2</th>
-            <td>Camiseta Arcane</td>
-            <td>50</td>
-            <td>50000</td>
-            <td>Unidad</td>
-            <td>Ropa</td>                     
-            <td>
-              <button type="button" class="btn btn-success">Editar</button>
-              <button type="button" class="btn btn-danger">Borrar</button>
-            </td>
+            <th scope="row"></th>
+            <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Productos</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Categoria</th>    
+                  <th scope="col">Precio</th>
+                  <th scope="col">Total unitario</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                <th scope="row">1</th>
+                <td>Pan tajado bolsa 200 grs</td>
+                <td>1</td>
+                <td>Alimentos</td>
+                <td>5000</td>
+                <td>5000</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Camiseta Arcane</td>
+                <td>1</td>
+                <td>Ropa</td>
+                <td>50000</td>
+                <td>50000</td>
+              </tr>
+              </tbody>
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>55000</td>
+                </tr>
+              </tbody>                     
           </tr> 
 
-        </tbody>
+   
       </table>
       
 

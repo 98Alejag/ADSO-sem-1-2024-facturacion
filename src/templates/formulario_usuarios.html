@@ -20,11 +20,11 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Productos
+                Usuarios
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="lista_productos.html">Listar Productos</a>
-                <a class="dropdown-item" href="formulario_producto.html">Crear Producto</a>
+                <a class="dropdown-item" href="lista_usuarios.html">Listar Usuarios</a>
+                <a class="dropdown-item" href="formulario_usuarios.html">Crear Usuarios</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
               </div>
@@ -37,60 +37,34 @@
           </form>
         </div>
     </nav>
-    <h2>Listado de Productos</h2>   
-    <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Cantidad Inventario</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Unidad de Medida</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Pan tajado bolsa 200 grs</td>
-            <td>100</td>
-            <td>5000</td>
-            <td>Unidad</td>
-            <td>Alimentos</td>
-            <td>
-              <button type="button" class="btn btn-success">Editar</button>
-              <button type="button" class="btn btn-danger">Borrar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Carne cerdo costilla</td>
-            <td>10000</td>
-            <td>32</td>
-            <td>GRS</td>
-            <td>Alimentos</td>                     
-            <td>
-              <button type="button" class="btn btn-success">Editar</button>
-              <button type="button" class="btn btn-danger">Borrar</button>
-            </td>
-          </tr> 
-          <tr>
-            <th scope="row">2</th>
-            <td>Camiseta Arcane</td>
-            <td>50</td>
-            <td>50000</td>
-            <td>Unidad</td>
-            <td>Ropa</td>                     
-            <td>
-              <button type="button" class="btn btn-success">Editar</button>
-              <button type="button" class="btn btn-danger">Borrar</button>
-            </td>
-          </tr> 
+    <h2>Crear Usuario</h2>   
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="tipo_ususario">Tipo de usuario</label>
+              <select id="tipo_ususario" class="form-control">
+                <option selected>Por favor seleccione...</option>
+                <option value="administrador">Administrador</option>
+                <option value="cliente">Cliente</option>
+              </select>
+            </div>
+          </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Nombre completo del usuario">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="id_usuario">ID Usuario</label>
+            <input type="number" class="form-control" id="id_usuario">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="contrasena">Contraseña</label>
+            <input type="password" class="form-control" id="contrasena">
+          </div>
+        </div>
 
-        </tbody>
-      </table>
-      
-
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>  
 </body>
 </html>

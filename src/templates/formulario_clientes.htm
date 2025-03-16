@@ -20,11 +20,11 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Productos
+                Clientes
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="lista_productos.html">Listar Productos</a>
-                <a class="dropdown-item" href="formulario_producto.html">Crear Producto</a>
+                <a class="dropdown-item" href="lista_clientes.html">Listar Clientes</a>
+                <a class="dropdown-item" href="formulario_clientes.htm">Crear Clientes</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
               </div>
@@ -37,60 +37,47 @@
           </form>
         </div>
     </nav>
-    <h2>Listado de Productos</h2>   
-    <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Cantidad Inventario</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Unidad de Medida</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Pan tajado bolsa 200 grs</td>
-            <td>100</td>
-            <td>5000</td>
-            <td>Unidad</td>
-            <td>Alimentos</td>
-            <td>
-              <button type="button" class="btn btn-success">Editar</button>
-              <button type="button" class="btn btn-danger">Borrar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Carne cerdo costilla</td>
-            <td>10000</td>
-            <td>32</td>
-            <td>GRS</td>
-            <td>Alimentos</td>                     
-            <td>
-              <button type="button" class="btn btn-success">Editar</button>
-              <button type="button" class="btn btn-danger">Borrar</button>
-            </td>
-          </tr> 
-          <tr>
-            <th scope="row">2</th>
-            <td>Camiseta Arcane</td>
-            <td>50</td>
-            <td>50000</td>
-            <td>Unidad</td>
-            <td>Ropa</td>                     
-            <td>
-              <button type="button" class="btn btn-success">Editar</button>
-              <button type="button" class="btn btn-danger">Borrar</button>
-            </td>
-          </tr> 
+    <h2>Crear Clientes</h2>   
+    <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="nombre_cliente">Nombre </label>
+            <input type="text" class="form-control" id="nombre_cliente" placeholder="Nombre completo">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="tipo_identificacion">Tipo identificación</label>
+            <input type="text" class="form-control" id="tipo_identificacion">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="numero_documento">Número del documento</label>
+            <input type="number" class="form-control" id="numero_documento">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="telefono">Teléfono</label>
+            <input type="number" class="form-control" id="telefono">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="fecha_de_nacimiento">Fecha de nacimiento</label>
+            <input type="number" class="form-control" id="fecha_de_nacimiento">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" class="form-control" id="correo">
+          </div>
+        </div>
 
-        </tbody>
-      </table>
-      
-
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="tipo_de_documento">Tipo de documento</label>
+            <select id="tipo_de_documento" class="form-control">
+              <option selected>Por favor seleccione...</option>
+              <option value="cedula_de_ciudadania">Cédula de ciudadania</option>
+              <option value="tarjeta_de_identidad">Tarjeta de Identidad</option>
+            </select>
+          </div>
+          
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>  
 </body>
 </html>
