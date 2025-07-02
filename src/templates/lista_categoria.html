@@ -2,46 +2,28 @@
     
 
 {% block contenido %}
-<h2> {{ titulo }} </h2>   
+<div class="container mt-8">
+<h2 style="text-align: center;"> {{ titulo }} </h2>   
 <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nombre de la categoria</th>
-        <th scope="col">Nombre del producto</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Unidad de Medida</th>
-        <th scope="col">Cantidad en inventario</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
+      {% for categoria in categorias %}
       <tr>
-        <th scope="row">1</th>
-        <td>Alimentos</td>
-        <td>Pan tajado bolsa 200 grs</td>
-        <td>5000</td>
-        <td>Unidad</td>
-        <td>100</td>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{categoria.nombre_categoria}}</td>
         <td>
           <button type="button" class="btn btn-success">Editar</button>
           <button type="button" class="btn btn-danger">Borrar</button>
         </td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Ropa</td>
-        <td>Camiseta Arcane</td>
-        <td>50000</td>
-        <td>Unidad</td>
-        <td>50</td>                     
-        <td>
-          <button type="button" class="btn btn-success">Editar</button>
-          <button type="button" class="btn btn-danger">Borrar</button>
-        </td>
-      </tr> 
-
+      {% endfor %}
     </tbody>
   </table>
-  
+  </div>
 {% endblock contenido %}

@@ -2,33 +2,78 @@
     
 
 {% block contenido %}
-<h2> {{ titulo }} </h2>   
-<form>
-    <div class="form-row">
+
+<div class="container mt-4">
+<h2 style="text-align: center;"> {{ titulo }} </h2>   
+<form action="/formulario_usuarios" method="post">
+  <div class="form-row">
         <div class="form-group col-md-4">
           <label for="tipo_ususario">Tipo de usuario</label>
-          <select id="tipo_ususario" class="form-control">
+          <select id="tipo_usuario" class="form-control" name="tipo_usuario">
             <option selected>Por favor seleccione...</option>
             <option value="administrador">Administrador</option>
+            <option value="vendedor">Vendedor</option>
             <option value="cliente">Cliente</option>
           </select>
         </div>
       </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="nombre">Nombre</label>
-        <input type="text" class="form-control" id="nombre" placeholder="Nombre completo del usuario">
+        <label for="nombre">Nombre </label>
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo">
+      </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="tipo_de_documento">Tipo de documento</label>
+        <select id="tipo_de_documento" class="form-control" name="tipo_de_documento">
+          <option selected>Por favor seleccione...</option>
+          <option value="CC">Cédula de ciudadania</option>
+          <option value="TI">Tarjeta de Identidad</option>
+        </select>
       </div>
       <div class="form-group col-md-6">
-        <label for="id_usuario">ID Usuario</label>
-        <input type="number" class="form-control" id="id_usuario">
+        <label for="numero_documento">Número del documento</label>
+        <input type="number" class="form-control" name="numero_documento" id="numero_documento">
       </div>
       <div class="form-group col-md-6">
-        <label for="contrasena">Contraseña</label>
-        <input type="password" class="form-control" id="contrasena">
+        <label for="telefono">Teléfono</label>
+        <input type="number" class="form-control" name="telefono" id="telefono">
       </div>
+      <div class="form-group col-md-6">
+        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+        <input type="date" class="form-control" name="fecha_nacimiento"  id="fecha_nacimiento">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="direccion">Dirección</label>
+        <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Ej: Calle 10 #5-23, Bogotá">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="correo">Correo electrónico</label>
+        <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com">
+        <span id="emailError" class="alert alert-danger" role="alert" style="display: none;">Por favor, ingresa un correo válido.</span>
+    </div>
     </div>
 
+
     <button type="submit" class="btn btn-primary">Guardar</button>
-  </form>  
+  </form>    
+</div>
+
+  <script type="text/javascript">
+    function validarEmail(email) {
+    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+document.getElementById("correo").addEventListener("blur", function() {
+    var email = this.value;
+    var errorMensaje = document.getElementById("emailError");
+
+    if (!validarEmail(email)) {
+        errorMensaje.style.display = "block";
+    } else {
+        errorMensaje.style.display = "none";
+    }
+}); 
+  </script>
 {% endblock contenido %}

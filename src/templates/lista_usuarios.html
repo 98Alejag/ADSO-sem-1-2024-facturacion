@@ -2,42 +2,40 @@
     
 
 {% block contenido %}
-<h2> {{ titulo }} </h2>   
+<h2 style="text-align: center;"> {{ titulo }} </h2>   
 <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Tipo de usuario</th>
         <th scope="col">Nombre</th>
-        <th scope="col">ID ususario</th>
-        <th scope="col">contraseña</th>
+        <th scope="col">Tipo de identificación</th>
+        <th scope="col">Núemro de documento</th>
+        <th scope="col">Telefóno</th>
+        <th scope="col">Fecha de nacimiento</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Correo</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
+      {% for usuario in usuarios %}
       <tr>
-        <th scope="row">1</th>
-        <td>Administrador</td>
-        <td>Jorge Ballestero</td>
-        <td>admin001</td>
-        <td>2005</td>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{usuario.tipo_usuario}}</td>
+        <td>{{usuario.nombre}}</td>
+        <td>{{usuario.tipo_de_documento}}</td>
+        <td>{{usuario.numero_documento}}</td>
+        <td>{{usuario.telefono}}</td>
+        <td>{{usuario.fecha_nacimiento}}</td>
+        <td>{{usuario.direccion}}</td>
+        <td>{{usuario.correo}}</td>
         <td>
           <button type="button" class="btn btn-success">Editar</button>
           <button type="button" class="btn btn-danger">Borrar</button>
         </td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Cliente</td>
-        <td>Marly Alejandra Gutierrez Joven</td>
-        <td>customer001</td>
-        <td>1895</td>               
-        <td>
-          <button type="button" class="btn btn-success">Editar</button>
-          <button type="button" class="btn btn-danger">Borrar</button>
-        </td>
-      </tr> 
-
+      {% endfor %}
     </tbody>
   </table>
 {% endblock contenido %}

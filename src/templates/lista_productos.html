@@ -2,61 +2,36 @@
     
 
 {% block contenido %}
-<h2> {{ titulo }} </h2>   
+<h2 style="text-align: center;"> {{ titulo }} </h2>   
 <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Descripción</th>
         <th scope="col">Código</th>
-        <th scope="col">Cantidad Inventario</th>
-        <th scope="col">Precio</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Valor Unitario</th>
         <th scope="col">Unidad de Medida</th>
+        <th scope="col">Cantidad Inventario</th>
         <th scope="col">Categoria</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
+      {% for producto in productos %}
       <tr>
-        <th scope="row">1</th>
-        <td>Pan tajado bolsa 200 grs</td>
-        <td>AAA00001</td>
-        <td>100</td>
-        <td>5000</td>
-        <td>Unidad</td>
-        <td>Alimentos</td>
+        <th scope="row">{{ loop.index }}</th>
+        <th>{{producto.codigo}}</th>
+        <td>{{producto.descripcion}}</td>
+        <td>${{"%.2f"|format(producto.valor_unitario) if producto.valor_unitario is number else producto.valor_unitario}}</td>
+        <td>{{producto.unidad_medida}}</td>
+        <td>{{producto.cantidad_stock | round(0) if producto.cantidad_stock is number else producto.cantidad_stock}}</td>
+        <td>{{producto.categoria}}</td>
         <td>
           <button type="button" class="btn btn-success">Editar</button>
           <button type="button" class="btn btn-danger">Borrar</button>
         </td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Carne cerdo costilla</td>
-        <td>AAA00002</td>
-        <td>10000</td>
-        <td>32</td>
-        <td>GRS</td>
-        <td>Alimentos</td>                     
-        <td>
-          <button type="button" class="btn btn-success">Editar</button>
-          <button type="button" class="btn btn-danger">Borrar</button>
-        </td>
-      </tr> 
-      <tr>
-        <th scope="row">3</th>
-        <td>Camiseta Arcane</td>
-        <td>AAA00003</td>
-        <td>50</td>
-        <td>50000</td>
-        <td>Unidad</td>
-        <td>Ropa</td>                     
-        <td>
-          <button type="button" class="btn btn-success">Editar</button>
-          <button type="button" class="btn btn-danger">Borrar</button>
-        </td>
-      </tr> 
-
+      {% endfor %}
     </tbody>
   </table>
 
