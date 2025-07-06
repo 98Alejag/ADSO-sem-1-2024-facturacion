@@ -1,9 +1,23 @@
 {% extends 'layout.html' %}
-    
+
 
 {% block contenido %}
-<h2 style="text-align: center;"> {{ titulo }} </h2>   
-<table class="table">
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<h2 style="text-align: center;"> {{ titulo }} </h2>
+<div class="card card-body">
+  <table class="table table-striped table-bordered">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
@@ -22,17 +36,25 @@
         <th scope="row">{{ loop.index }}</th>
         <th>{{producto.codigo}}</th>
         <td>{{producto.descripcion}}</td>
-        <td>${{"%.2f"|format(producto.valor_unitario) if producto.valor_unitario is number else producto.valor_unitario}}</td>
+        <td>${{"%.2f"|format(producto.valor_unitario) if producto.valor_unitario is number else
+          producto.valor_unitario}}
+        </td>
         <td>{{producto.unidad_medida}}</td>
-        <td>{{producto.cantidad_stock | round(0) if producto.cantidad_stock is number else producto.cantidad_stock}}</td>
+        <td>{{producto.cantidad_stock | round(0) if producto.cantidad_stock is number else producto.cantidad_stock}}
+        </td>
         <td>{{producto.categoria}}</td>
         <td>
-          <button type="button" class="btn btn-success">Editar</button>
-          <button type="button" class="btn btn-danger">Borrar</button>
+          <form action="{{ url_for('delete_producto') }}" method="POST" style="display:inline;">
+            <button type="button" class="btn btn-success">Editar</button>
+            <input type="hidden" name="id" value="{{ producto.id }}">
+            <button type="submit" class="btn btn-danger"
+              onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Borrar</button>
+          </form>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+</div>
 
 {% endblock contenido %}

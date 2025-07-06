@@ -1,15 +1,13 @@
 {% extends 'layout.html' %}
-    
+
 
 {% block contenido %}
 <div class="container mt-4">
-    <h2 style="text-align: center;"> {{ titulo }} </h2>   
-    <form method="post">
+  <h2 style="text-align: center;"> {{ titulo }} </h2>
+  <div class="col md-6">
+    <div class="card card-body">
+      <form action="/formulario_facturacion" method="post">
         <div class="form-row">
-          <!-- <div class="form-group col-md-6">
-            <label for="id_factura">ID Factur</label>
-            <input type="text" class="form-control" name="id_factura" id="id_factura" >
-          </div> -->
           <div class="form-group col-md-6">
             <label for="id_factura">ID Factura</label>
             <input type="text" class="form-control" id="id_factura" name="id_factura" value="{{ nuevo_id }}" readonly>
@@ -23,9 +21,9 @@
             <select class="form-control" name="cliente" id="cliente">
               <option selected disabled>Seleccione un cliente</option>
               {% for usuario in usuarios %}
-                {% if usuario.tipo_usuario == 'cliente' %}
-                  <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
-                {% endif %}
+              {% if usuario.tipo_usuario == 'cliente' %}
+              <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
+              {% endif %}
               {% endfor %}
             </select>
           </div>
@@ -34,35 +32,31 @@
             <select class="form-control" name="vendedor" id="vendedor">
               <option selected disabled>Seleccione un vendedor</option>
               {% for usuario in usuarios %}
-                {% if usuario.tipo_usuario == 'vendedor' %}
-                  <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
-                {% endif %}
+              {% if usuario.tipo_usuario == 'vendedor' %}
+              <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
+              {% endif %}
               {% endfor %}
             </select>
           </div>
 
           <div class="form-group col-md-6">
-        <label for="productos">Productos</label>
-        <select id="producto" class="form-control" name="producto">
-          <option selected>Por favor seleccione...</option>
-          {% for producto in productos %}
-          <option value="{{producto.descripcion}}">{{producto.descripcion}}</option>
-          {% endfor %}
-        </select>
-      </div>  
+            <label for="productos">Productos</label>
+            <select id="producto" class="form-control" name="producto">
+              <option selected>Por favor seleccione...</option>
+              {% for producto in productos %}
+              <option value="{{producto.descripcion}}">{{producto.descripcion}}</option>
+              {% endfor %}
+            </select>
+          </div>
           <div class="form-group col-md-6">
             <label for="cantidad">Cantidad</label>
-            <input type="number" class="form-control" id="cantidad" name="cantidad" >
+            <input type="number" class="form-control" id="cantidad" name="cantidad">
           </div>
-          <!-- <div class="form-group col-md-6">
-            <label for="precio">Precio</label>
-            <input type="text" class="form-control" id="precio" name="precio" readonly>
-          </div> -->
           <div class="form-group col-md-6">
             <label for="precio">Precio</label>
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text">$</span> 
+                <span class="input-group-text">$</span>
               </div>
               <input type="text" class="form-control" id="precio" name="precio" readonly>
             </div>
@@ -72,32 +66,33 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
+              </div>
+              <input type="number" class="form-control" id="total" name="total" readonly>
             </div>
-            <input type="number" class="form-control" id="total" name="total" readonly>
           </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-      </form>  
-      
+          <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 <script>
-function calcularTotal() {
-  const precio = parseFloat(document.getElementById('precio').value) || 0;
-  const cantidad = parseFloat(document.getElementById('cantidad').value) || 0;
-  const total = precio * cantidad;
-  document.getElementById('total').value = total.toFixed(2);
-}
+  function calcularTotal() {
+    const precio = parseFloat(document.getElementById('precio').value) || 0;
+    const cantidad = parseFloat(document.getElementById('cantidad').value) || 0;
+    const total = precio * cantidad;
+    document.getElementById('total').value = total.toFixed(2);
+  }
 
-document.getElementById('producto').addEventListener('change', async function () {
-  const descripcion = this.value;
-  const response = await fetch(`/get_precio/${descripcion}`);
-  const data = await response.json();
-  document.getElementById('precio').value = data.precio;
-  calcularTotal();
-});
+  document.getElementById('producto').addEventListener('change', async function () {
+    const descripcion = this.value;
+    const response = await fetch(`/get_precio/${descripcion}`);
+    const data = await response.json();
+    document.getElementById('precio').value = data.precio;
+    calcularTotal();
+  });
 
-document.getElementById('cantidad').addEventListener('input', calcularTotal);
+  document.getElementById('cantidad').addEventListener('input', calcularTotal);
 </script>
 
- </div>
 {% endblock contenido %}
