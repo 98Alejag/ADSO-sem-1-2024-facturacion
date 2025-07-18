@@ -15,8 +15,10 @@
 {% endif %}
 {% endwith %}
 
+
+
+<h2 style="text-align: center;"> {{ titulo }} </h2>
 <div class="container mt-4">
-  <h2 style="text-align: center;"> {{ titulo }} </h2>
   <div class="card card-body">
     <form action="/formulario_usuarios" method="post">
       <div class="form-row">
@@ -25,7 +27,6 @@
             <label for="tipo_ususario">Tipo de usuario</label>
             <select id="tipo_usuario" class="form-control" name="tipo_usuario">
               <option selected>Por favor seleccione...</option>
-              <option value="administrador">Administrador</option>
               <option value="vendedor">Vendedor</option>
               <option value="cliente">Cliente</option>
             </select>
@@ -67,9 +68,12 @@
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
     </form>
   </div>
 </div>
+
+
 
 
 

@@ -33,7 +33,6 @@ class Usuarios(Base):
         usuarios = session.query(Usuarios).all()
         return usuarios
     
-    @staticmethod
     def delete_usuario(usuario_id):  
         usuario = session.query(Usuarios).filter_by(id=usuario_id).first()
         if usuario:

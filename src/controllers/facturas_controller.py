@@ -51,7 +51,7 @@ class FacturasController(FlaskController):
                 flash('Factura eliminada')
             else:
                 flash('Factura no encontrada')
-        except Exception as e:
-            flash(f'Error al eliminar la factura: {str(e)}')
+        except:
+            flash('Error al eliminar la factura')
         return redirect(url_for('lista_facturacion'))
 

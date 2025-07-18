@@ -15,47 +15,52 @@
 {% endif %}
 {% endwith %}
 <h2 style="text-align: center;"> {{ titulo }} </h2>
-<div class="card card-body">
-  <table class="table table-striped table-bordered">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Tipo de usuario</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Tipo de identificación</th>
-        <th scope="col">Núemro de documento</th>
-        <th scope="col">Telefóno</th>
-        <th scope="col">Fecha de nacimiento</th>
-        <th scope="col">Dirección</th>
-        <th scope="col">Correo</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for usuario in usuarios %}
-      <tr>
-        <th scope="row">{{ loop.index }}</th>
-        <td>{{usuario.tipo_usuario}}</td>
-        <td>{{usuario.nombre}}</td>
-        <td>{{usuario.tipo_de_documento}}</td>
-        <td>{{usuario.numero_documento}}</td>
-        <td>{{usuario.telefono}}</td>
-        <td>{{usuario.fecha_nacimiento}}</td>
-        <td>{{usuario.direccion}}</td>
-        <td>{{usuario.correo}}</td>
-        <td>
-          <!-- <button type="button" class="btn btn-success">Editar</button>
+<div class="con mt-4">
+  <div class="card card-body">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tipo de usuario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Tipo de identificación</th>
+            <th scope="col">Núemro de documento</th>
+            <th scope="col">Telefóno</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for usuario in usuarios %}
+          <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{usuario.tipo_usuario}}</td>
+            <td>{{usuario.nombre}}</td>
+            <td>{{usuario.tipo_de_documento}}</td>
+            <td>{{usuario.numero_documento}}</td>
+            <td>{{usuario.telefono}}</td>
+            <td>{{usuario.fecha_nacimiento}}</td>
+            <td>{{usuario.direccion}}</td>
+            <td>{{usuario.correo}}</td>
+            <td>
+              <!-- <button type="button" class="btn btn-success">Editar</button>
           <button type="button" class="btn btn-danger">Borrar</button>  -->
-          <form action="{{ url_for('delete_usuario') }}" method="POST" style="display:inline;">
-            <button type="button" class="btn btn-success">Editar</button>
-            <input type="hidden" name="id" value="{{ usuario.id }}">
-            <button type="submit" class="btn btn-danger"
-              onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Borrar</button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+              <form action="{{ url_for('delete_usuario') }}" method="POST" style="display:inline;">
+                <button type="button" class="btn btn-success">Editar</button>
+                <input type="hidden" name="id" value="{{ usuario.id }}">
+                <button type="submit" class="btn btn-danger"
+                  onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Borrar</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
 {% endblock contenido %}

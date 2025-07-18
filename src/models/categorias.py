@@ -18,7 +18,6 @@ class Categorias(Base):
         categorias = session.query(Categorias).all()
         return categorias
     
-    @staticmethod
     def delete_categoria(categoria_id):
         categoria = session.query(Categorias).filter_by(id=categoria_id).first()
         if categoria:
@@ -27,6 +26,16 @@ class Categorias(Base):
             return True
         return False
     
-    # def editar_categoria()
-    #     categoria = session.query.get(id)
-    #     categoria = Categorias.     
+    def traer_categoria_por_nombre(nombre_categoria):
+        categoria = session.query(Categorias).filter(Categorias.nombre_categoria == nombre_categoria).first()
+        return categoria
+    
+    def obtener_categoria_por_id(categoria_id):
+        return session.query(Categorias).get(categoria_id)
+
+    def edit_categoria(categoria_id, nuevo_nombre):
+        categoria = session.query(Categorias).get(categoria_id)
+        if categoria:
+            categoria.nombre_categoria = nuevo_nombre
+            session.commit()
+        return categoria

@@ -41,6 +41,7 @@ def delete_usuario():
             flash('Usuario eliminado exitosamente')
         else:
             flash('Usuario no encontrado')
-    except Exception as e:
-        flash(f'Error al eliminar el usuario: {str(e)}')
+    except:
+        flash('Error al eliminar el usuario')
     return redirect(url_for('lista_usuarios'))
+    

@@ -31,7 +31,7 @@
           <th scope="row">{{ loop.index }}</th>
           <td>{{categoria.nombre_categoria}}</td>
           <td>
-            <a href="#" class="btn btn-success">Editar</a>
+            <a href="{{ url_for('edit_categoria', id=categoria.id) }}" class="btn btn-success">Editar</a>
             <a href="{{ url_for('delete_categoria', id=categoria.id) }}" class="btn btn-danger"
               onclick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?');">Borrar</a>
           </td>

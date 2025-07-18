@@ -19,16 +19,11 @@
   <div class="row justify-content-center">
     <div class="col md-6">
       <div class="card card-body">
-        <form action="/formulario_categoria" method="post">
+        <form action="{{ url_for('edit_categoria', id=categoria.id) }}" method="post">
           <div class="form-group">
             <label for="nombre_categoria">Nombre Categoría</label>
-            <input type="text" class="form-control" id="nombre_categoria" {% if categoria_almacenar %}
-              value="{{ categoria_almacenar.nombre_categoria }}" {% endif %} name="nombre_categoria"
-              placeholder="Describa el producto (dato único)">
-            {% if errorNombre %}
-            <span class="alert alert-danger" role="alert" id="errorNombre" style="display: block;">{{ errorNombre
-              }}</span>
-            {% endif %}
+            <input type="text" class="form-control" id="nombre_categoria" name="nombre_categoria"
+              value="{{ categoria.nombre_categoria }}" placeholder="Describa el producto (dato único)">
           </div>
           <button type="submit" class="btn btn-primary">Guardar</button>
         </form>

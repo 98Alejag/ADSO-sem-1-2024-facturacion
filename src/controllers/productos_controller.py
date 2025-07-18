@@ -27,10 +27,17 @@ class ProductosContorller(FlaskController):
             categoria = request.form.get('categoria')
             producto_almacenar = Productos(codigo,descripcion,valor_unitario,unidad_medida,cantidad_inventario,categoria)        
             producto_repetido =  Productos.traer_producto_por_descripcion(descripcion)
+            codigo_repetido = Productos.traer_producto_por_codigo(codigo)
             if producto_repetido:
                 return render_template('formulario_producto.html'
                                     ,titulo='Crear un producto'
                                     ,errorProducto = "La descripción no se puede repetir"
+                                    ,categorias = categorias
+                                    ,producto_almacenar = producto_almacenar)
+            if codigo_repetido:
+                return render_template('formulario_producto.html'
+                                    ,titulo='Crear un producto'
+                                    ,errorCodigo = "El código no se puede repetir"
                                     ,categorias = categorias
                                     ,producto_almacenar = producto_almacenar)
             try:
@@ -41,17 +48,16 @@ class ProductosContorller(FlaskController):
         return render_template('formulario_producto.html',titulo='Crear un producto',categorias = categorias)
 
     
-@app.route('/delete_producto', methods=['POST'])
-def delete_producto():
-    id = request.form.get('id')
-    try:
-        eliminado = Productos.delete_producto(id)
-        if eliminado:
-            flash('Producto eliminado exitosamente')
-        else:
-            flash('Producto no encontrado')
-    except Exception as e:
-        flash(f'Error al eliminar el producto: {str(e)}')
-    return redirect(url_for('lista_productos'))
+    @app.route('/delete_producto', methods=['POST'])
+    def delete_producto():
+        id = request.form.get('id')
+        try:
+            eliminado = Productos.delete_producto(id)
+            if eliminado:
+                flash('Producto eliminado exitosamente')
+            else:
+                flash('Producto no encontrado')
+        except:
+            flash('Error al eliminar el producto')
+        return redirect(url_for('lista_productos'))
 
-    

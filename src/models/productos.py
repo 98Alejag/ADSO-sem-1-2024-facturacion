@@ -27,12 +27,15 @@ class Productos(Base):
     def traer_productos():
         productos = session.query(Productos).all()
         return productos 
+
+    def traer_producto_por_descripcion(descripcion):
+        producto = session.query(Productos).filter(Productos.descripcion == descripcion).first()
+        return producto
+       
+    def traer_producto_por_codigo(codigo):
+        producto = session.query(Productos).filter(Productos.codigo == codigo).first()
+        return producto
     
-    @classmethod
-    def traer_producto_por_descripcion(cls, descripcion):
-        return session.query(cls).filter_by(descripcion=descripcion).first()
- 
-    @staticmethod
     def delete_producto(producto_id):  
         producto = session.query(Productos).filter_by(id=producto_id).first()
         if producto:

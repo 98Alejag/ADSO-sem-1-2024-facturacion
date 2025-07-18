@@ -2,79 +2,79 @@
 
 
 {% block contenido %}
+<h2 style="text-align: center;"> {{ titulo }} </h2>
 <div class="container mt-4">
-  <h2 style="text-align: center;"> {{ titulo }} </h2>
-  <div class="col md-6">
-    <div class="card card-body">
-      <form action="/formulario_facturacion" method="post">
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="id_factura">ID Factura</label>
-            <input type="text" class="form-control" id="id_factura" name="id_factura" value="{{ nuevo_id }}" readonly>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="fecha">Fecha</label>
-            <input type="date" class="form-control" name="fecha" id="fecha" placeholder="dd/mm/yyyy">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="cliente">Cliente</label>
-            <select class="form-control" name="cliente" id="cliente">
-              <option selected disabled>Seleccione un cliente</option>
-              {% for usuario in usuarios %}
-              {% if usuario.tipo_usuario == 'cliente' %}
-              <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
-              {% endif %}
-              {% endfor %}
-            </select>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="vendedor">Vendedor</label>
-            <select class="form-control" name="vendedor" id="vendedor">
-              <option selected disabled>Seleccione un vendedor</option>
-              {% for usuario in usuarios %}
-              {% if usuario.tipo_usuario == 'vendedor' %}
-              <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
-              {% endif %}
-              {% endfor %}
-            </select>
-          </div>
+  <div class="card card-body">
+    <form action="/formulario_facturacion" method="post">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="id_factura">ID Factura</label>
+          <input type="text" class="form-control" id="id_factura" name="id_factura" value="{{ nuevo_id }}" readonly>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="fecha">Fecha</label>
+          <input type="date" class="form-control" name="fecha" id="fecha" placeholder="dd/mm/yyyy">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="cliente">Cliente</label>
+          <select class="form-control" name="cliente" id="cliente">
+            <option selected disabled>Seleccione un cliente</option>
+            {% for usuario in usuarios %}
+            {% if usuario.tipo_usuario == 'cliente' %}
+            <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="vendedor">Vendedor</label>
+          <select class="form-control" name="vendedor" id="vendedor">
+            <option selected disabled>Seleccione un vendedor</option>
+            {% for usuario in usuarios %}
+            {% if usuario.tipo_usuario == 'vendedor' %}
+            <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
 
-          <div class="form-group col-md-6">
-            <label for="productos">Productos</label>
-            <select id="producto" class="form-control" name="producto">
-              <option selected>Por favor seleccione...</option>
-              {% for producto in productos %}
-              <option value="{{producto.descripcion}}">{{producto.descripcion}}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="cantidad">Cantidad</label>
-            <input type="number" class="form-control" id="cantidad" name="cantidad">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="precio">Precio</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-              </div>
-              <input type="text" class="form-control" id="precio" name="precio" readonly>
+        <div class="form-group col-md-6">
+          <label for="productos">Productos</label>
+          <select id="producto" class="form-control" name="producto">
+            <option selected>Por favor seleccione...</option>
+            {% for producto in productos %}
+            <option value="{{producto.descripcion}}">{{producto.descripcion}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" class="form-control" id="cantidad" name="cantidad">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="precio">Precio</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
             </div>
+            <input type="text" class="form-control" id="precio" name="precio" readonly>
           </div>
-          <div class="form-group col-md-6">
-            <label for="total">Total</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-              </div>
-              <input type="number" class="form-control" id="total" name="total" readonly>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="total">Total</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
             </div>
+            <input type="number" class="form-control" id="total" name="total" readonly>
           </div>
-          <button type="submit" class="btn btn-primary">Guardar</button>
-      </form>
-    </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
   </div>
 </div>
+
 
 <script>
   function calcularTotal() {

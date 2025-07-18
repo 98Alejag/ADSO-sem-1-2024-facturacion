@@ -15,8 +15,8 @@
 {% endif %}
 {% endwith %}
 
+<h2 style="text-align: center;"> {{ titulo }} </h2>
 <div class="container mt-4">
-  <h2 style="text-align: center;"> {{ titulo }} </h2>
   <div class="card card-body">
     <form action="/formulario_producto" method="post">
       <div class="form-row">
@@ -26,7 +26,11 @@
             value="{{ producto_almacenar.codigo }}" {% endif %} name="codigo" placeholder="AAA00000"
             onblur="validarcodigo()">
           <span class="alert alert-danger" role="alert" id="errorCodigo" style="display: none;">Error, el campo debe
-            tener 3 letras mayúsculas y número </span>
+            tener 3 letras mayúsculas y números </span>
+          {% if errorCodigo %}
+          <span class="alert alert-danger" role="alert" id="errorCodigo" style="display: block;">{{ errorCodigo
+            }}</span>
+          {% endif %}
         </div>
         <div class="form-group col-md-6">
           <label for="descripcion">Descripción</label>

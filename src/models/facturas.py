@@ -28,17 +28,10 @@ class Facturas(Base):
         return factura
     
     def traer_facturas():
-        facturas = session.query(Facturas).all()
+        # facturas = session.query(Facturas).all()
+        facturas = session.query(Facturas).order_by(Facturas.id_factura)
         return facturas
-    
-    # @staticmethod
-    # def traer_precio_por_descripcion(cls, descripcion):    
-    #     return session.query(cls).filter_by(descripcion=descripcion).first()
-    
-    # @staticmethod
-    # def traer_producto_por_descripcion(cls, descripcion):
-    #     return session.query(cls).filter_by(descripcion=descripcion).first()
-    
+        
     def generar_id_factura():
         ultima_factura = session.query(Facturas).order_by(Facturas.id_factura.desc()).first()
         if ultima_factura and ultima_factura.id_factura.startswith("INVOICE"):
@@ -50,7 +43,7 @@ class Facturas(Base):
     
     @staticmethod
     def delete_factura(factura_id):
-        factura = session.query(Facturas).filter_by(id_factura= factura_id).first()
+        factura = session.query(Facturas).filter_by(id_factura = factura_id).first()
         if factura:
             session.delete(factura)
             session.commit()
