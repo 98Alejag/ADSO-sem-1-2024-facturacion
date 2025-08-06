@@ -13,12 +13,12 @@
         </div>
         <div class="form-group col-md-6">
           <label for="fecha">Fecha</label>
-          <input type="date" class="form-control" name="fecha" id="fecha" placeholder="dd/mm/yyyy">
+          <input type="date" class="form-control" name="fecha" id="fecha" placeholder="dd/mm/yyyy" required>
         </div>
         <div class="form-group col-md-6">
           <label for="cliente">Cliente</label>
-          <select class="form-control" name="cliente" id="cliente">
-            <option selected disabled>Seleccione un cliente</option>
+          <select class="form-control" name="cliente" id="cliente" required>
+            <option value="" disabled selected>Seleccione un cliente</option>
             {% for usuario in usuarios %}
             {% if usuario.tipo_usuario == 'cliente' %}
             <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
@@ -27,9 +27,26 @@
           </select>
         </div>
         <div class="form-group col-md-6">
+          <label for="numero_documento">Número del documento</label>
+          <input type="number" class="form-control" id="numero_documento" name="numero_documento" required readonly>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="telefono">Teléfono</label>
+          <input type="number" class="form-control" name="telefono" id="telefono" required readonly>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" name="direccion" class="form-control"
+            placeholder="Ej: Calle 6 #6-28, Pital" readonly required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com" readonly required>
+        </div>
+        <div class="form-group col-md-6">
           <label for="vendedor">Vendedor</label>
-          <select class="form-control" name="vendedor" id="vendedor">
-            <option selected disabled>Seleccione un vendedor</option>
+          <select class="form-control" name="vendedor" id="vendedor" required>
+            <option value="" disabled selected>Seleccione un vendedor</option>
             {% for usuario in usuarios %}
             {% if usuario.tipo_usuario == 'vendedor' %}
             <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
@@ -37,10 +54,9 @@
             {% endfor %}
           </select>
         </div>
-
         <div class="form-group col-md-6">
           <label for="productos">Productos</label>
-          <select id="producto" class="form-control" name="producto">
+          <select id="producto" class="form-control" name="producto" required>
             <option selected>Por favor seleccione...</option>
             {% for producto in productos %}
             <option value="{{producto.descripcion}}">{{producto.descripcion}}</option>
@@ -49,7 +65,7 @@
         </div>
         <div class="form-group col-md-6">
           <label for="cantidad">Cantidad</label>
-          <input type="number" class="form-control" id="cantidad" name="cantidad">
+          <input type="number" class="form-control" id="cantidad" name="cantidad" required>
         </div>
         <div class="form-group col-md-6">
           <label for="precio">Precio</label>
@@ -75,6 +91,26 @@
   </div>
 </div>
 
+<script>
+  $("#cliente").change(function() {
+    value = $(this).val();
+    $.ajax({
+      type: "GET",
+      url: "/consultar_cliente_por_nombre/" + value,
+      contentType: "application/json",
+      dataType: 'json',
+      success: function (result) {
+        console.log("Result");
+        console.log(result);
+        $('#numero_documento').val(result.numero_documento);
+        $('#telefono').val(result.telefono);
+        $('#direccion').val(result.direccion);
+        $('#correo').val(result.correo);
+        $('#id_usuario').val(result.id);
+      }
+    });
+  });
+</script>
 
 <script>
   function calcularTotal() {
@@ -94,5 +130,6 @@
 
   document.getElementById('cantidad').addEventListener('input', calcularTotal);
 </script>
+
 
 {% endblock contenido %}

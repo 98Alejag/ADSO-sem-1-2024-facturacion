@@ -1,5 +1,4 @@
 
-/* Configuración para el sticky footer */
 html, body {
     height: 100%;
     margin: 0;
@@ -8,21 +7,21 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ocupa al menos toda la altura de la pantalla */
+    min-height: 100vh; 
     background: #bdc3c7;
     background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);
     background: linear-gradient(to right, #2c3e50, #bdc3c7);
 }
 
-/* Contenedor principal (asegura que crezca y empuje el footer hacia abajo) */
+
 .container {
     flex: 1;
-    padding-top: 1rem; /* Ajusta según necesites */
+    padding-top: 1rem; 
 }
 
-/* Estilos del pie de página */
+
 .pie-pagina {
-    margin-top: auto; /* Empuja el footer hacia abajo */
+    margin-top: auto; 
 }
 
 .pie-pagina .grupo-1 {
@@ -36,7 +35,7 @@ body {
     font-size: 15px;
 }
 
-/* Fuente */
+
 @import url(https://fonts.googleapis.com/css2?family=Libertinus+Math&display=swap);
 
 .libertinus-math-regular {

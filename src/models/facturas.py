@@ -6,16 +6,24 @@ class Facturas(Base):
     id_factura = Column(String(20), primary_key=True)
     fecha = Column(Date, nullable=False)
     cliente = Column(String(100), nullable=False)
+    numero_documento = Column(String(20), nullable=False)
+    telefono = Column(String(20), nullable=False)
+    direccion = Column(String(100), nullable=False)
+    correo = Column(String(50), nullable=False)
     vendedor = Column(String(100), nullable=False)
     producto = Column(String(100), nullable=False)
     cantidad = Column(Float(10,8), nullable=False)
     precio = Column(Float(10,8), nullable=False)
     total = Column(Float(10,8), nullable=False)
 
-    def __init__(self, id_factura, fecha, cliente, vendedor, producto, cantidad, precio, total):
+    def __init__(self, id_factura, fecha, cliente, numero_documento, telefono, direccion, correo, vendedor, producto, cantidad, precio, total):
         self.id_factura = id_factura
         self.fecha = fecha
         self.cliente = cliente
+        self.numero_documento = numero_documento
+        self.telefono = telefono
+        self.direccion = direccion
+        self.correo = correo
         self.vendedor = vendedor
         self.producto = producto
         self.cantidad = cantidad
@@ -28,7 +36,6 @@ class Facturas(Base):
         return factura
     
     def traer_facturas():
-        # facturas = session.query(Facturas).all()
         facturas = session.query(Facturas).order_by(Facturas.id_factura)
         return facturas
         
@@ -41,12 +48,4 @@ class Facturas(Base):
             nuevo_numero = 1
         return f"INVOICE{nuevo_numero:04d}"
     
-    @staticmethod
-    def delete_factura(factura_id):
-        factura = session.query(Facturas).filter_by(id_factura = factura_id).first()
-        if factura:
-            session.delete(factura)
-            session.commit()
-            return True
-        return False
 

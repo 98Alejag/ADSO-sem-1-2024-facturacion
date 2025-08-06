@@ -22,8 +22,12 @@
         <form action="{{ url_for('edit_categoria', id=categoria.id) }}" method="post">
           <div class="form-group">
             <label for="nombre_categoria">Nombre Categoría</label>
-            <input type="text" class="form-control" id="nombre_categoria" name="nombre_categoria"
+            <input type="text" class="form-control" id="nombre_categoria" {% if categoria_editada %} 
+            value="{{categoria_editada.nuevo_nombre}}" {% endif %} name="nombre_categoria"
               value="{{ categoria.nombre_categoria }}" placeholder="Describa el producto (dato único)">
+            {% if errorNombre %}
+            <div class="alert alert-danger">{{ errorNombre }}</div>
+            {% endif %}
           </div>
           <button type="submit" class="btn btn-primary">Guardar</button>
         </form>

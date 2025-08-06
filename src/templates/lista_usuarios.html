@@ -25,7 +25,7 @@
             <th scope="col">Tipo de usuario</th>
             <th scope="col">Nombre</th>
             <th scope="col">Tipo de identificación</th>
-            <th scope="col">Núemro de documento</th>
+            <th scope="col">Número de documento</th>
             <th scope="col">Telefóno</th>
             <th scope="col">Fecha de nacimiento</th>
             <th scope="col">Dirección</th>
@@ -46,10 +46,8 @@
             <td>{{usuario.direccion}}</td>
             <td>{{usuario.correo}}</td>
             <td>
-              <!-- <button type="button" class="btn btn-success">Editar</button>
-          <button type="button" class="btn btn-danger">Borrar</button>  -->
+              <a href="{{ url_for('edit_usuario', id=usuario.id) }}" class="btn btn-success">Editar</a>
               <form action="{{ url_for('delete_usuario') }}" method="POST" style="display:inline;">
-                <button type="button" class="btn btn-success">Editar</button>
                 <input type="hidden" name="id" value="{{ usuario.id }}">
                 <button type="submit" class="btn btn-danger"
                   onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Borrar</button>

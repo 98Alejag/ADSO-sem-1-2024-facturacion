@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String
-from src.models import session, Base 
+from src.models import session, Base
+
+
 
 class Categorias(Base):
     __tablename__ = "categorias"
@@ -19,6 +21,10 @@ class Categorias(Base):
         return categorias
     
     def delete_categoria(categoria_id):
+        from src.models.productos import Productos
+        productos_rel = session.query(Productos).filter_by(categoria=categoria_id).first()
+        if productos_rel:
+            return False
         categoria = session.query(Categorias).filter_by(id=categoria_id).first()
         if categoria:
             session.delete(categoria)

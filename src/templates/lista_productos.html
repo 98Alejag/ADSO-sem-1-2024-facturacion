@@ -44,15 +44,15 @@
             <td>{{producto.unidad_medida}}</td>
             <td>{{producto.cantidad_stock | round(0) if producto.cantidad_stock is number else producto.cantidad_stock}}
             </td>
-            <td>{{producto.categoria}}</td>
+            <td>{{producto.categoria_rel.nombre_categoria}}</td>
             <td>
+              <a href="{{ url_for('edit_producto', id=producto.id) }}" class="btn btn-success">Editar</a>
               <form action="{{ url_for('delete_producto') }}" method="POST" style="display:inline;">
-                <button type="button" class="btn btn-success">Editar</button>
                 <input type="hidden" name="id" value="{{ producto.id }}">
                 <button type="submit" class="btn btn-danger"
                   onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Borrar</button>
               </form>
-            </td> 
+            </td>
           </tr>
           {% endfor %}
         </tbody>

@@ -1,78 +1,51 @@
 {% extends 'layout.html' %}
 
-
 {% block contenido %}
 {% with messages = get_flashed_messages() %}
-{% if messages %}
-{% for message in messages %}
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  {{ message }}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-{% endfor %}
-{% endif %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+  {% endif %}
 {% endwith %}
 
-<h2 style="text-align: center;"> {{ titulo }} </h2>
+<h2 style="text-align: center;">{{ titulo }}</h2>
 <div class="container mt-4">
-  <div class="card card-body">
-    <table class="table table-striped table-bordered">
-      <div class="col md-4 offset md-4">
-        <tr>
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">ID Factura</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Cliente</th>
-              <th scope="col">Vendedor</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for factura in facturas %}
-            <tr>
-              <td>{{factura.id_factura}}</td>
-              <td>{{factura.fecha}}</td>
-              <td>{{factura.cliente}}</td>
-              <td>{{factura.vendedor}}</td>
-              <td>
-                <form action="{{ url_for('delete_factura') }}" method="POST" style="display:inline;">
-                  <button type="button" class="btn btn-success">Editar</button>
-                  <input type="hidden" name="id_factura" value="{{ factura.id_factura }}">
-                  <button type="submit" class="btn btn-danger"
-                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta factura?');">Borrar</button>
-                </form>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </tr>
+  <div class="row">
+    {% for factura in facturas %}
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-header bg-dark text-white">
+            Factura #{{ factura.id_factura }} - {{ factura.fecha }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ factura.cliente }}</h5>
+            <p class="card-text">
+              <strong>Documento:</strong> {{ factura.numero_documento}}<br>
+              <strong>Teléfono:</strong> {{ factura.telefono}}<br>
+              <strong>Dirección:</strong> {{ factura.direccion}}<br>
+              <strong>Correo:</strong> {{ factura.correo}}<br>
+              <strong>Vendedor:</strong> {{ factura.vendedor}}
+            </p>
+            <hr>
+            <h6>Detalle de producto</h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Producto:</strong> {{ factura.producto }}<br>
+                <strong>Cantidad:</strong> {{ factura.cantidad | round(0) if factura.cantidad is number else factura.cantidad }}<br>
+                <strong>Precio:</strong> ${{ "%.2f"|format(factura.precio) if factura.precio is number else factura.precio }}<br>
+                <strong>Total:</strong> ${{ "%.2f"|format(factura.total) if factura.total is number else factura.total }}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <tr>
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">ID Factura</th>
-            <th scope="col">Productos</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for factura in facturas %}
-          <tr>
-            <th scope="col">{{factura.id_factura}}</th>
-            <th scope="col">{{factura.producto}}</th>
-            <th scope="col">{{factura.cantidad | round(0) if factura.cantidad is number else factura.cantidad}}</th>
-            <th scope="col">${{"%.2f"|format (factura.precio) if factura.precio is number else factura.precio}}</th>
-            <th scope="col">${{"%.2f"|format (factura.total) if factura.total is number else factura.total}}</th>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </tr>
-    </table>
+    {% endfor %}
   </div>
 </div>
 {% endblock contenido %}

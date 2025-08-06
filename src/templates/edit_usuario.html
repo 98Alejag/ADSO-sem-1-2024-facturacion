@@ -20,21 +20,22 @@
 <h2 style="text-align: center;"> {{ titulo }} </h2>
 <div class="container mt-4">
   <div class="card card-body">
-    <form action="/formulario_usuarios" method="post">
+    <form action="{{ url_for('edit_usuario', id=usuario.id) }}" method="post">
       <div class="form-row">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="tipo_ususario">Tipo de usuario</label>
-            <select id="tipo_usuario" class="form-control" name="tipo_usuario" required>
-              <option value="" disabled selected>Por favor seleccione...</option>
-              <option value="Vendedor">Vendedor</option>
-              <option value="Cliente">Cliente</option>
+            <select id="tipo_usuario" class="form-control" name="tipo_usuario">
+              <option selected>Por favor seleccione...</option>
+              <option value="vendedor" {% if usuario.tipo_usuario=='vendedor' %}selected{% endif %}>Vendedor</option>
+              <option value="cliente" {% if usuario.tipo_usuario=='cliente' %}selected{% endif %}>Cliente</option>
             </select>
           </div>
           <div class="form-group col-md-6">
             <label for="nombre">Nombre </label>
-            <input type="text" class="form-control" id="nombre" {% if usuario_almacenar %}
-              value="{{ usuario_almacenar.nombre }}" {% endif %} name="nombre" placeholder="Nombre completo" required>
+            <input type="text" class="form-control" id="nombre"
+              value="{{usuario_editado.new_nombre if usuario_editado else usuario.nombre}}" name="nombre"
+              placeholder="Nombre completo">
             {% if errorNombre %}
             <span class="alert alert-danger" role="alert" id="errorNombre" style="display: block;">{{ errorNombre
               }}</span>
@@ -42,16 +43,19 @@
           </div>
           <div class="form-group col-md-6">
             <label for="tipo_de_documento">Tipo de documento</label>
-            <select id="tipo_de_documento" class="form-control" name="tipo_de_documento" required>
-              <option value="" disabled selected>Por favor seleccione...</option>
-              <option value="CC">Cédula de ciudadania</option>
-              <option value="TI">Tarjeta de Identidad</option>
+            <select id="tipo_de_documento" class="form-control" name="tipo_de_documento">
+              <option selected>Por favor seleccione...</option>
+              <option value="CC" {% if usuario.tipo_de_documento=='CC' %}selected{% endif %}>Cédula de ciudadania
+              </option>
+              <option value="TI" {% if usuario.tipo_de_documento=='TI' %}selected{% endif %}>Tarjeta de Identidad
+              </option>
             </select>
           </div>
           <div class="form-group col-md-6">
             <label for="numero_documento">Número del documento</label>
-            <input type="number" class="form-control" name="numero_documento" {% if usuario_almacenar %}
-              value="{{ usuario_almacenar.numero_documento }}" {% endif %} id="numero_documento" required>
+            <input type="number" class="form-control" name="numero_documento"
+              value="{{ usuario_editado.new_numero_documento if usuario_editado else usuario.numero_documento }}"
+              id="numero_documento">
             {% if errorNumero %}
             <span class="alert alert-danger" role="alert" id="errorNombre" style="display: block;">{{ errorNumero
               }}</span>
@@ -59,20 +63,24 @@
           </div>
           <div class="form-group col-md-6">
             <label for="telefono">Teléfono</label>
-            <input type="number" class="form-control" name="telefono" id="telefono" required>
+            <input type="number" class="form-control" name="telefono" id="telefono"
+              value="{{usuario_editado.new_telefono if usuario_editado else usuario.telefono}}">
           </div>
           <div class="form-group col-md-6">
             <label for="fecha_nacimiento">Fecha de nacimiento</label>
-            <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" required>
+            <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento"
+              value="{{usuario_editado.new_fecha_nacimiento if usuario_editado else usuario.fecha_nacimiento}}">
           </div>
           <div class="form-group col-md-6">
             <label for="direccion">Dirección</label>
             <input type="text" id="direccion" name="direccion" class="form-control"
-              placeholder="Ej: Calle 6 #6-28, Pital" required>
+              value="{{usuario_editado.new_direccion if usuario_editado else usuario.direccion}}"
+              placeholder="Ej: Calle 10 #5-23, Bogotá">
           </div>
           <div class="form-group col-md-6">
             <label for="correo">Correo electrónico</label>
-            <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com" required>
+            <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com"
+              value="{{usuario_editado.new_correo if usuario_editado else usuario.correo}}">
             <span id="emailError" class="alert alert-danger" role="alert" style="display: none;">Por favor, ingresa un
               correo válido.</span>
           </div>

@@ -33,6 +33,39 @@ class Usuarios(Base):
         usuarios = session.query(Usuarios).all()
         return usuarios
     
+    def traer_usuario_por_nombre(nombre):
+        usuario = session.query(Usuarios).filter(Usuarios.nombre == nombre).first()
+        return usuario
+    
+    def traer_usuario_por_numero_documento(numero_documento):
+        usuario = session.query(Usuarios).filter(Usuarios.numero_documento == numero_documento).first()
+        return usuario
+    
+    def obtener_usuario_por_id(usuario_id):
+        return session.query(Usuarios).get(usuario_id)
+    
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    
+    def obtener_cliente_por_nombre(nombre):
+        usuario = session.query(Usuarios).filter(Usuarios.nombre == nombre).first()
+        return usuario.as_dict()
+
+    def edit_usuario(usuario_id, new_tipo_usuario, new_nombre, new_tipo_de_documento, new_numero_documento, 
+                                                    new_telefono, new_fecha_nacimiento, new_direccion, new_correo):
+        usuario = session.query(Usuarios).get(usuario_id)
+        if usuario:
+            usuario.tipo_usuario = new_tipo_usuario
+            usuario.nombre = new_nombre 
+            usuario.tipo_de_documento = new_tipo_de_documento
+            usuario.numero_documento = new_numero_documento
+            usuario.telefono = new_telefono 
+            usuario.fecha_nacimiento = new_fecha_nacimiento
+            usuario.direccion = new_direccion
+            usuario.correo = new_correo
+            session.commit()
+        return usuario
+
     def delete_usuario(usuario_id):  
         usuario = session.query(Usuarios).filter_by(id=usuario_id).first()
         if usuario:
@@ -40,3 +73,4 @@ class Usuarios(Base):
             session.commit()
             return True
         return False  
+    
