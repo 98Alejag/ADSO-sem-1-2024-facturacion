@@ -1,0 +1,135 @@
+{% extends 'layout.html' %}
+
+
+{% block contenido %}
+<h2 style="text-align: center;"> {{ titulo }} </h2>
+<div class="container mt-4">
+  <div class="card card-body">
+    <form action="/formulario_facturacion" method="post">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="id_factura">ID Factura</label>
+          <input type="text" class="form-control" id="id_factura" name="id_factura" value="{{ nuevo_id }}" readonly>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="fecha">Fecha</label>
+          <input type="date" class="form-control" name="fecha" id="fecha" placeholder="dd/mm/yyyy" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="cliente">Cliente</label>
+          <select class="form-control" name="cliente" id="cliente" required>
+            <option value="" disabled selected>Seleccione un cliente</option>
+            {% for usuario in usuarios %}
+            {% if usuario.tipo_usuario == 'cliente' %}
+            <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="numero_documento">Número del documento</label>
+          <input type="number" class="form-control" id="numero_documento" name="numero_documento" required readonly>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="telefono">Teléfono</label>
+          <input type="number" class="form-control" name="telefono" id="telefono" required readonly>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" name="direccion" class="form-control"
+            placeholder="Ej: Calle 6 #6-28, Pital" readonly required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com" readonly required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="vendedor">Vendedor</label>
+          <select class="form-control" name="vendedor" id="vendedor" required>
+            <option value="" disabled selected>Seleccione un vendedor</option>
+            {% for usuario in usuarios %}
+            {% if usuario.tipo_usuario == 'vendedor' %}
+            <option value="{{ usuario.nombre }}">{{ usuario.nombre }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="productos">Productos</label>
+          <select id="producto" class="form-control" name="producto" required>
+            <option selected>Por favor seleccione...</option>
+            {% for producto in productos %}
+            <option value="{{producto.descripcion}}">{{producto.descripcion}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="precio">Precio</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input type="text" class="form-control" id="precio" name="precio" readonly>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="total">Total</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input type="number" class="form-control" id="total" name="total" readonly>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  $("#cliente").change(function() {
+    value = $(this).val();
+    $.ajax({
+      type: "GET",
+      url: "/consultar_cliente_por_nombre/" + value,
+      contentType: "application/json",
+      dataType: 'json',
+      success: function (result) {
+        console.log("Result");
+        console.log(result);
+        $('#numero_documento').val(result.numero_documento);
+        $('#telefono').val(result.telefono);
+        $('#direccion').val(result.direccion);
+        $('#correo').val(result.correo);
+        $('#id_usuario').val(result.id);
+      }
+    });
+  });
+</script>
+
+<script>
+  function calcularTotal() {
+    const precio = parseFloat(document.getElementById('precio').value) || 0;
+    const cantidad = parseFloat(document.getElementById('cantidad').value) || 0;
+    const total = precio * cantidad;
+    document.getElementById('total').value = total.toFixed(2);
+  }
+
+  document.getElementById('producto').addEventListener('change', async function () {
+    const descripcion = this.value;
+    const response = await fetch(`/get_precio/${descripcion}`);
+    const data = await response.json();
+    document.getElementById('precio').value = data.precio;
+    calcularTotal();
+  });
+
+  document.getElementById('cantidad').addEventListener('input', calcularTotal);
+</script>
+
+
+{% endblock contenido %}

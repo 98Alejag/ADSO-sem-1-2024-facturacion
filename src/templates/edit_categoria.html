@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+
+{% block contenido %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h2 style="text-align: center;"> {{ titulo }} </h2>
+<div class="container mt-6">
+  <div class="row justify-content-center">
+    <div class="col md-6">
+      <div class="card card-body">
+        <form action="{{ url_for('edit_categoria', id=categoria.id) }}" method="post">
+          <div class="form-group">
+            <label for="nombre_categoria">Nombre Categoría</label>
+            <input type="text" class="form-control" id="nombre_categoria" {% if categoria_editada %} 
+            value="{{categoria_editada.nuevo_nombre}}" {% endif %} name="nombre_categoria"
+              value="{{ categoria.nombre_categoria }}" placeholder="Describa el producto (dato único)">
+            {% if errorNombre %}
+            <div class="alert alert-danger">{{ errorNombre }}</div>
+            {% endif %}
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock contenido %}

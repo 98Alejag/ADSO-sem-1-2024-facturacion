@@ -1,0 +1,107 @@
+{% extends 'layout.html' %}
+
+{% block contenido %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+
+<h2 style="text-align: center;"> {{ titulo }} </h2>
+<div class="container mt-4">
+  <div class="card card-body">
+    <form action="/formulario_usuarios" method="post">
+      <div class="form-row">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="tipo_ususario">Tipo de usuario</label>
+            <select id="tipo_usuario" class="form-control" name="tipo_usuario" required>
+              <option value="" disabled selected>Por favor seleccione...</option>
+              <option value="Vendedor">Vendedor</option>
+              <option value="Cliente">Cliente</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="nombre">Nombre </label>
+            <input type="text" class="form-control" id="nombre" {% if usuario_almacenar %}
+              value="{{ usuario_almacenar.nombre }}" {% endif %} name="nombre" placeholder="Nombre completo" required>
+            {% if errorNombre %}
+            <span class="alert alert-danger" role="alert" id="errorNombre" style="display: block;">{{ errorNombre
+              }}</span>
+            {% endif %}
+          </div>
+          <div class="form-group col-md-6">
+            <label for="tipo_de_documento">Tipo de documento</label>
+            <select id="tipo_de_documento" class="form-control" name="tipo_de_documento" required>
+              <option value="" disabled selected>Por favor seleccione...</option>
+              <option value="CC">Cédula de ciudadania</option>
+              <option value="TI">Tarjeta de Identidad</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="numero_documento">Número del documento</label>
+            <input type="number" class="form-control" name="numero_documento" {% if usuario_almacenar %}
+              value="{{ usuario_almacenar.numero_documento }}" {% endif %} id="numero_documento" required>
+            {% if errorNumero %}
+            <span class="alert alert-danger" role="alert" id="errorNombre" style="display: block;">{{ errorNumero
+              }}</span>
+            {% endif %}
+          </div>
+          <div class="form-group col-md-6">
+            <label for="telefono">Teléfono</label>
+            <input type="number" class="form-control" name="telefono" id="telefono" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="fecha_nacimiento">Fecha de nacimiento</label>
+            <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion" class="form-control"
+              placeholder="Ej: Calle 6 #6-28, Pital" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com" required>
+            <span id="emailError" class="alert alert-danger" role="alert" style="display: none;">Por favor, ingresa un
+              correo válido.</span>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+  function validarEmail(email) {
+    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+
+  document.getElementById("correo").addEventListener("blur", function () {
+    var email = this.value;
+    var errorMensaje = document.getElementById("emailError");
+
+    if (!validarEmail(email)) {
+      errorMensaje.style.display = "block";
+    } else {
+      errorMensaje.style.display = "none";
+    }
+  }); 
+</script>
+{% endblock contenido %}

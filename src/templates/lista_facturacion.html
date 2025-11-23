@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block contenido %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<h2 style="text-align: center;">{{ titulo }}</h2>
+<div class="container mt-4">
+  <div class="row">
+    {% for factura in facturas %}
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-header bg-dark text-white">
+            Factura #{{ factura.id_factura }} - {{ factura.fecha }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ factura.cliente }}</h5>
+            <p class="card-text">
+              <strong>Documento:</strong> {{ factura.numero_documento}}<br>
+              <strong>Teléfono:</strong> {{ factura.telefono}}<br>
+              <strong>Dirección:</strong> {{ factura.direccion}}<br>
+              <strong>Correo:</strong> {{ factura.correo}}<br>
+              <strong>Vendedor:</strong> {{ factura.vendedor}}
+            </p>
+            <hr>
+            <h6>Detalle de producto</h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Producto:</strong> {{ factura.producto }}<br>
+                <strong>Cantidad:</strong> {{ factura.cantidad | round(0) if factura.cantidad is number else factura.cantidad }}<br>
+                <strong>Precio:</strong> ${{ "%.2f"|format(factura.precio) if factura.precio is number else factura.precio }}<br>
+                <strong>Total:</strong> ${{ "%.2f"|format(factura.total) if factura.total is number else factura.total }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock contenido %}

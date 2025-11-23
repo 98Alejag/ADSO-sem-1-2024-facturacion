@@ -1,0 +1,45 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    background: #bdc3c7;
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);
+    background: linear-gradient(to right, #2c3e50, #bdc3c7);
+}
+
+
+.container {
+    flex: 1;
+    padding-top: 1rem; 
+}
+
+
+.pie-pagina {
+    margin-top: auto; 
+}
+
+.pie-pagina .grupo-1 {
+    background-color: #0a1a2a;
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.pie-pagina .grupo-1 small {
+    font-size: 15px;
+}
+
+
+@import url(https://fonts.googleapis.com/css2?family=Libertinus+Math&display=swap);
+
+.libertinus-math-regular {
+    font-family: "Libertinus Math", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
